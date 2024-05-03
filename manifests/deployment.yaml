@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ephemeral-kopf
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      application: ephemeral-kopf
+  template:
+    metadata:
+      labels:
+        application: ephemeral-kopf
+    spec:
+      serviceAccountName: ephemeral-kopf-serviceaccount
+      containers:
+      - name: ephemeral
+        image: emmaliaocode/kopf-tutorial:latest
